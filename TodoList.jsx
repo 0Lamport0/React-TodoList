@@ -6,7 +6,8 @@ import List from "./List"
 class TodoList extends Component  {
 
     state = {
-        keyword: ""
+        keyword: "",
+        initValue: "-Lamport"
     }
 
     handleReceiveKeyWord(keyword){
@@ -19,8 +20,11 @@ class TodoList extends Component  {
     render(){
         return (
             <>
-                <Form onReceiveKeyWord={this.handleReceiveKeyWord.bind(this)}></Form>
-                <List keyword={this.state.keyword}></List>
+                <Form 
+                    onReceiveKeyWord={this.handleReceiveKeyWord.bind(this)}
+                    initValue={this.state.initValue}
+                ></Form>
+                <List form={<Form />} keyword={this.state.keyword}></List>
             </>
         )
     }

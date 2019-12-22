@@ -1,9 +1,22 @@
 import React,{ Component } from "react"
 
-class List extends Component {
+import PropTypes from 'prop-types'
+
+import ListItem from './ListItem'
+
+export default class List extends Component {
+
+    static propTypes = {
+        // keyword 是一个字符串类型，并且是必填的
+        keyword: PropTypes.string.isRequired
+    }
+
+    // static defaultProps = {
+    //     keyword:"112343241"
+    // }
 
     state = {
-        list: []
+        list: [1,2,3]
     }
 
     handleClick(index){
@@ -27,7 +40,12 @@ class List extends Component {
                 {
                     this.state.list.map((value,index)=>{
                         return (
-                            <li key={value+index}>{value} <button style={{marginLeft:"10px"}} onClick={this.handleClick.bind(this,index)}>X</button></li>
+                            <ListItem 
+                                key={value+index}
+                                value={value}
+                                index={index}
+                                onItemClick={this.handleClick.bind(this)}
+                            ></ListItem>
                         )
                     })
                 }
@@ -36,4 +54,7 @@ class List extends Component {
     }
 }
 
-export default List
+// List.defaultProps = {
+//     keyword:"123123"
+// }
+

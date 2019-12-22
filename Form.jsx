@@ -4,12 +4,37 @@ class Form extends Component {
 
     // 保存 input 框中的内容
     state = {
-        keyword: ""
+        keyword: "",
+        arr: ["a","b","c"]
     }
 
+    // handleChange(e){
+    //     let val = e.target.value
+    //     this.setState({
+    //         keyword: val,
+    //         arr: [
+    //             ...this.state.arr,
+    //             val
+    //         ],
+    //         // arr: this.state.arr.concat(val)
+    //     },()=>{
+    //        console.log(this.state.keyword) 
+    //     })
+    // }
+
     handleChange(e){
-        this.setState({
-            keyword: e.target.value
+        let val = e.target.value
+        this.setState(state=>{
+            return {
+                keyword: val,
+                arr: [
+                    ...state.arr,
+                    val
+                ],
+                // arr: this.state.arr.concat(val)
+            }
+        },()=>{
+           console.log(this.state.keyword) 
         })
     }
 
@@ -22,12 +47,26 @@ class Form extends Component {
     }
 
     render(){
-        return <input 
+        return (
+            <>
+                <input 
                     value={this.state.keyword} 
                     onChange={this.handleChange.bind(this)}
                     onKeyUp={this.handleKeyUp.bind(this)}
                     type="text"
                 />
+                {
+                    this.state.arr.map((value,index)=>{
+                        return (
+                            <span key={value+index}>{ value }</span>
+                        )
+                    })
+                }
+                {
+                    this.props.initValue
+                }
+            </>
+        )
     }
 }
 
